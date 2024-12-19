@@ -16,23 +16,33 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Update Mono
+    - name: Install Mono
       run: |
-        brew update
-        brew upgrade mono
+        brew install mono
+        mono --version
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 6.0
-
-    - name: Update NuGet
+    - name: Install MSBuild
       run: |
+        brew install --cask visual-studio
+        msbuild -version
+
+    - name: Install NuGet
+      run: |
+        brew install nuget
         nuget update -self
+        nuget --version
 
-    - name: Restore dependencies and build
+    - name: Restore dependencies
       run: |
         msbuild /restore ProjectTerra.iOS/ProjectTerra.iOS.csproj /p:Configuration=Release /p:Platform=iPhoneSimulator
+
+    - name: Build iOS Project
+      run: |
+        msbuild ProjectTerra.iOS/ProjectTerra.iOS.csproj \
+          /t:Build \
+          /p:Configuration=Release \
+          /p:Platform=iPhoneSimulator \
+          /p:OutputPath=./output
 
     - name: Archive and Export IPA
       run: |
