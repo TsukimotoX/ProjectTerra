@@ -30,10 +30,14 @@ jobs:
       - name: Build and Publish iOS App
         run: |
           dotnet publish ProjectTerra.iOS/ProjectTerra.iOS.csproj \
-            -c Release \
-            -f:net9.0-ios \
-            /p:RuntimeIdentifier=iossimulator-x64 \
-            /p:OutputPath=./output
+          -c Release \
+          -f:net9.0-ios \
+          /p:RuntimeIdentifier=ios-arm64 \
+          /p:CodesignKey=null \
+          /p:CodesignProvision=null \
+          /p:CodesignEntitlements=null \
+          /p:EnableCodeSigning=false
+
 
 
       - name: Archive App to IPA
