@@ -8,6 +8,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>true</ImplicitUsings>
     <SupportedOSPlatformVersion>13.0</SupportedOSPlatformVersion>
+    <SelfContained>false</SelfContained>
+    <RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
 
     <DefineConstants>$(DefineConstants);IOS</DefineConstants>
 
