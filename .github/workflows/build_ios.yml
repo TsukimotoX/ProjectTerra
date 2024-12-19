@@ -9,39 +9,52 @@ on:
       - main
 
 jobs:
-  build:
-    runs-on: macos-13
+  build-ios:
+    runs-on: macos-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Install .NET 9 SDK
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 9.0.100
+      - name: Check available Xcode versions
+        run: ls /Applications | grep Xcode
 
-    - name: Install iOS Workload
-      run: |
-        dotnet workload install ios
-        dotnet workload restore ProjectTerra.iOS/ProjectTerra.iOS.csproj
-      
-    - name: Download Xcode
-      run: |
-        curl -o Xcode_16.2.xip https://developer.apple.com/download/more/
-        sudo xip --expand Xcode_16.2.xip
-        sudo mv Xcode.app /Applications/Xcode_16.2.app
-        sudo xcode-select --switch /Applications/Xcode_16.2.app/Contents/Developer
+      - name: Switch to Xcode 16.1
+        run: |
+          if [ -d "/Applications/Xcode_16.1.app" ]; then
+            sudo xcode-select --switch /Applications/Xcode_16.1.app/Contents/Developer
+          else
+            echo "Xcode 16.1 is not available on this runner."
+            exit 1
+          fi
 
+      - name: Verify Xcode version
+        run: xcodebuild -version
 
-    - name: Set Xcode Version
-      run: sudo xcode-select --switch /Applications/Xcode_16.2.app/Contents/Developer
+      - name: Install .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 9.0.x
 
-    - name: Build iOS App
-      run: |
-        dotnet build ProjectTerra.iOS/ProjectTerra.iOS.csproj \
-          -c Release \
-          /p:MtouchLink=SdkOnly \
-          /p:EnableCodeSigning=false
-    
+      - name: Restore NuGet packages
+        run: dotnet restore ProjectTerra.iOS/ProjectTerra.iOS.csproj
+
+      - name: Build the iOS project
+        run: |
+          dotnet build ProjectTerra.iOS/ProjectTerra.iOS.csproj \
+            -c Release \
+            /p:MtouchLink=SdkOnly \
+            /p:EnableCodeSigning=false \
+            /p:SupportedOSPlatformVersion=17.5
+
+      # Optional: Uncomment the following to download and install Xcode 16.1 if unavailable.
+      # - name: Download Xcode 16.1
+      #   run: |
+      #     curl -L -o Xcode_16.1.xip https://developer.apple.com/download/more/
+
+      # - name: Extract Xcode 16.1
+      #   run: |
+      #     mkdir -p /Applications
+      #     sudo xip -x Xcode_16.1.xip -C /Applications
+
   
