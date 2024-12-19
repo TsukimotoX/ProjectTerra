@@ -1,4 +1,4 @@
-name: Build iOS App with Xamarin
+name: Build iOS App with Xamarin and .NET 9
 
 on:
   push:
@@ -20,10 +20,12 @@ jobs:
       run: |
         brew update
         brew install mono
+        mono --version
 
-    - name: Install MSBuild
-      run: |
-        brew install --cask visual-studio
+    - name: Install .NET 9 SDK
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 9.0.100
 
     - name: Install NuGet
       run: |
@@ -32,15 +34,13 @@ jobs:
 
     - name: Restore NuGet dependencies
       run: |
-        nuget restore ProjectTerra.iOS/ProjectTerra.iOS.csproj
+        dotnet restore ProjectTerra.iOS/ProjectTerra.iOS.csproj
 
     - name: Build iOS Project
       run: |
-        msbuild ProjectTerra.iOS/ProjectTerra.iOS.csproj \
-          /t:Build \
-          /p:Configuration=Release \
-          /p:Platform=iPhoneSimulator \
-          /p:OutputPath=./output
+        dotnet build ProjectTerra.iOS/ProjectTerra.iOS.csproj \
+          -c Release \
+          -o ./output
 
     - name: Archive and Export IPA
       run: |
@@ -54,3 +54,4 @@ jobs:
       with:
         name: ProjectTerra.ipa
         path: ./output/*.ipa
+
