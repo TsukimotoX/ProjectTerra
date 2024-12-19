@@ -1,4 +1,4 @@
-name: Build iOS App with Xamarin and .NET 9
+name: Build iOS App without Code Signing
 
 on:
   push:
@@ -30,18 +30,17 @@ jobs:
       run: |
         dotnet restore ProjectTerra.iOS/ProjectTerra.iOS.csproj
 
-    - name: Publish iOS App
+    - name: Publish iOS App without Signing
       run: |
         dotnet publish ProjectTerra.iOS/ProjectTerra.iOS.csproj \
           -c Release \
           -o ./output \
           /p:RuntimeIdentifier=ios-arm64 \
-          /p:OutputType=Exe
+          /p:OutputType=Exe \
+          /p:CodesignKey=
 
     - name: Upload IPA as artifact
       uses: actions/upload-artifact@v3
       with:
         name: ProjectTerra.ipa
         path: ./output/*.ipa
-
-
