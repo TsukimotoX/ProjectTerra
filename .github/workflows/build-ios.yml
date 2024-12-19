@@ -16,12 +16,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Install Mono
-      run: |
-        brew update
-        brew install mono
-        mono --version
-
     - name: Install .NET 9 SDK
       uses: actions/setup-dotnet@v3
       with:
@@ -36,41 +30,13 @@ jobs:
       run: |
         dotnet restore ProjectTerra.iOS/ProjectTerra.iOS.csproj
 
-    - name: Build iOS Project
+    - name: Publish iOS App
       run: |
-        dotnet build ProjectTerra.iOS/ProjectTerra.iOS.csproj \
+        dotnet publish ProjectTerra.iOS/ProjectTerra.iOS.csproj \
           -c Release \
-          -o ./output
-
-    - name: Create Xcode Archive
-      run: |
-        xcodebuild archive \
-          -workspace ProjectTerra.iOS/ProjectTerra.iOS.xcodeproj \
-          -scheme ProjectTerra.iOS \
-          -archivePath ./output/ProjectTerra.xcarchive \
-          -sdk iphoneos
-
-    - name: Create ExportOptions.plist
-      run: |
-        echo '<?xml version="1.0" encoding="UTF-8"?>' > ExportOptions.plist
-        echo '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">' >> ExportOptions.plist
-        echo '<plist version="1.0">' >> ExportOptions.plist
-        echo '<dict>' >> ExportOptions.plist
-        echo '    <key>method</key>' >> ExportOptions.plist
-        echo '    <string>ad-hoc</string>' >> ExportOptions.plist
-        echo '    <key>compileBitcode</key>' >> ExportOptions.plist
-        echo '    <false/>' >> ExportOptions.plist
-        echo '    <key>thinning</key>' >> ExportOptions.plist
-        echo '    <string></string>' >> ExportOptions.plist
-        echo '</dict>' >> ExportOptions.plist
-        echo '</plist>' >> ExportOptions.plist
-
-    - name: Archive and Export IPA
-      run: |
-        xcodebuild -exportArchive \
-          -archivePath ./output/ProjectTerra.xcarchive \
-          -exportPath ./output \
-          -exportOptionsPlist ExportOptions.plist
+          -o ./output \
+          /p:RuntimeIdentifier=ios-arm64 \
+          /p:OutputType=Exe
 
     - name: Upload IPA as artifact
       uses: actions/upload-artifact@v3
