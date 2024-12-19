@@ -17,6 +17,7 @@
       Enable full trimming in Release mode.
       To learn more, see: https://learn.microsoft.com/dotnet/core/deploying/trimming/trimming-options#trimming-granularity
     -->
-    <TrimMode Condition="'$(Configuration)' == 'Release'">full</TrimMode>
+    <TrimMode>link</TrimMode>
+    <MtouchLink>Full</MtouchLink>
   </PropertyGroup>
 </Project>

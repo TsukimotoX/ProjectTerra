@@ -33,6 +33,7 @@ jobs:
       run: |
         dotnet build ProjectTerra.iOS/ProjectTerra.iOS.csproj \
           -c Release \
-          /p:PublishTrimmed=false \
+          /p:MtouchLink=None \
           /p:SupportedOSPlatformVersion=17.0 \
           /p:EnableCodeSigning=false
+  
