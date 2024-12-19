@@ -241,3 +241,4 @@ C:\Users\tsukimotoX\Desktop\ProjectTerra\ProjectTerra.iOS\obj\Debug\net9.0-ios\i
 C:\Users\tsukimotoX\Desktop\ProjectTerra\ProjectTerra.iOS\obj\Debug\net9.0-ios\iossimulator-x64\ProjectTerra.iOS.pdb
 C:\Users\tsukimotoX\Desktop\ProjectTerra\ProjectTerra.iOS\obj\Debug\net9.0-ios\iossimulator-x64\ProjectTerra.iOS.genruntimeconfig.cache
 C:\Users\tsukimotoX\Desktop\ProjectTerra\ProjectTerra.iOS\obj\Debug\net9.0-ios\iossimulator-x64\ref\ProjectTerra.iOS.dll
+C:\Users\tsukimotoX\Desktop\ProjectTerra\ProjectTerra.iOS\obj\Debug\net9.0-ios\iossimulator-x64\ProjectTerra.iOS.sourcelink.json

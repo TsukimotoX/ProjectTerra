@@ -61,3 +61,4 @@ C:\Users\tsukimotoX\Desktop\ProjectTerra\ProjectTerra\obj\Debug\net9.0\ProjectTe
 C:\Users\tsukimotoX\Desktop\ProjectTerra\ProjectTerra\obj\Debug\net9.0\refint\ProjectTerra.dll
 C:\Users\tsukimotoX\Desktop\ProjectTerra\ProjectTerra\obj\Debug\net9.0\ProjectTerra.pdb
 C:\Users\tsukimotoX\Desktop\ProjectTerra\ProjectTerra\obj\Debug\net9.0\ref\ProjectTerra.dll
+C:\Users\tsukimotoX\Desktop\ProjectTerra\ProjectTerra\obj\Debug\net9.0\ProjectTerra.sourcelink.json

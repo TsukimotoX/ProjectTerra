@@ -333,7 +333,7 @@
         }
       }
     },
-    "net9.0-ios18.1/iossimulator-x64": {
+    "net9.0-ios18.1/ios-arm64": {
       "JetBrains.Annotations/2023.3.0": {
         "type": "package",
         "compile": {
@@ -981,7 +981,7 @@
       }
     },
     "runtimes": {
-      "iossimulator-x64": {
+      "ios-arm64": {
         "#import": []
       }
     }
