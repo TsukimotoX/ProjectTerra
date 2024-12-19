@@ -1,4 +1,4 @@
-name: ProjectTerra.IOS build
+name: Build iOS App with Xamarin
 
 on:
   push:
@@ -15,22 +15,6 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-
-    - name: Install Mono
-      run: |
-        brew install mono
-        mono --version
-
-    - name: Install MSBuild
-      run: |
-        brew install --cask visual-studio
-        msbuild -version
-
-    - name: Install NuGet
-      run: |
-        brew install nuget
-        nuget update -self
-        nuget --version
 
     - name: Restore dependencies
       run: |
