@@ -1,4 +1,4 @@
-name: ProjectTerra iOS Build
+name: Build iOS App
 
 on:
   push:
@@ -9,52 +9,43 @@ on:
       - main
 
 jobs:
-  build-ios:
+  build:
     runs-on: macos-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Check available Xcode versions
-        run: ls /Applications | grep Xcode
-
-      - name: Switch to Xcode 16.1
-        run: |
-          if [ -d "/Applications/Xcode_16.1.app" ]; then
-            sudo xcode-select --switch /Applications/Xcode_16.1.app/Contents/Developer
-          else
-            echo "Xcode 16.1 is not available on this runner."
-            exit 1
-          fi
-
-      - name: Verify Xcode version
-        run: xcodebuild -version
-
       - name: Install .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 9.0.x
+          dotnet-version: '9.0.x'
 
-      - name: Restore NuGet packages
-        run: dotnet restore ProjectTerra.iOS/ProjectTerra.iOS.csproj
+      - name: Restore .NET Workloads
+        run: dotnet workload restore
 
-      - name: Build the iOS project
+      - name: Install Dependencies
+        run: sudo xcode-select --switch /Applications/Xcode_16.2.app/Contents/Developer
+
+      - name: Build and Publish iOS App
         run: |
-          dotnet build ProjectTerra.iOS/ProjectTerra.iOS.csproj \
+          dotnet publish ProjectTerra.iOS/ProjectTerra.iOS.csproj \
             -c Release \
-            /p:MtouchLink=SdkOnly \
-            /p:EnableCodeSigning=false \
-            /p:SupportedOSPlatformVersion=17.5
+            -f:net9.0-ios \
+            /p:RuntimeIdentifier=iossimulator-x64 \
+            /p:OutputPath=./output
 
-      # Optional: Uncomment the following to download and install Xcode 16.1 if unavailable.
-      # - name: Download Xcode 16.1
-      #   run: |
-      #     curl -L -o Xcode_16.1.xip https://developer.apple.com/download/more/
 
-      # - name: Extract Xcode 16.1
-      #   run: |
-      #     mkdir -p /Applications
-      #     sudo xip -x Xcode_16.1.xip -C /Applications
+      - name: Archive App to IPA
+        run: |
+          xcodebuild -exportArchive \
+          -archivePath ./output/ProjectTerra.xcarchive \
+          -exportPath ./output/ProjectTerra.ipa \
+          -exportOptionsPlist ./ExportOptions.plist \
+          CODE_SIGNING_ALLOWED=NO
 
-  
+      - name: Upload IPA
+        uses: actions/upload-artifact@v3
+        with:
+          name: ProjectTerra.ipa
+          path: ./output/ProjectTerra.ipa
