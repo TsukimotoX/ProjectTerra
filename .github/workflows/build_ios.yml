@@ -26,14 +26,14 @@ jobs:
         dotnet workload install ios
         dotnet workload restore ProjectTerra.iOS/ProjectTerra.iOS.csproj
 
-    - name: Select Xcode Version
-      run: sudo xcode-select -switch /Applications/Xcode_16.1.app/Contents/Developer
+    - name: Set Xcode Version
+      run: sudo xcode-select --switch /Applications/Xcode_16.2.app/Contents/Developer
 
     - name: Build iOS App
       run: |
         dotnet build ProjectTerra.iOS/ProjectTerra.iOS.csproj \
           -c Release \
-          /p:MtouchLink=None \
-          /p:SupportedOSPlatformVersion=17.0 \
+          /p:MtouchLink=SdkOnly \
           /p:EnableCodeSigning=false
+    
   
