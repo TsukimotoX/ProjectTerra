@@ -42,6 +42,29 @@ jobs:
           -c Release \
           -o ./output
 
+    - name: Create Xcode Archive
+      run: |
+        xcodebuild archive \
+          -workspace ProjectTerra.iOS/ProjectTerra.iOS.xcodeproj \
+          -scheme ProjectTerra.iOS \
+          -archivePath ./output/ProjectTerra.xcarchive \
+          -sdk iphoneos
+
+    - name: Create ExportOptions.plist
+      run: |
+        echo '<?xml version="1.0" encoding="UTF-8"?>' > ExportOptions.plist
+        echo '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">' >> ExportOptions.plist
+        echo '<plist version="1.0">' >> ExportOptions.plist
+        echo '<dict>' >> ExportOptions.plist
+        echo '    <key>method</key>' >> ExportOptions.plist
+        echo '    <string>ad-hoc</string>' >> ExportOptions.plist
+        echo '    <key>compileBitcode</key>' >> ExportOptions.plist
+        echo '    <false/>' >> ExportOptions.plist
+        echo '    <key>thinning</key>' >> ExportOptions.plist
+        echo '    <string></string>' >> ExportOptions.plist
+        echo '</dict>' >> ExportOptions.plist
+        echo '</plist>' >> ExportOptions.plist
+
     - name: Archive and Export IPA
       run: |
         xcodebuild -exportArchive \
