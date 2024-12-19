@@ -1,0 +1,167 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\tsukimotoX\\Desktop\\ProjectTerra\\ProjectTerra.Android\\ProjectTerra.Android.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\tsukimotoX\\Desktop\\ProjectTerra\\ProjectTerra.Android\\ProjectTerra.Android.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\tsukimotoX\\Desktop\\ProjectTerra\\ProjectTerra.Android\\ProjectTerra.Android.csproj",
+        "projectName": "ProjectTerra.Android",
+        "projectPath": "C:\\Users\\tsukimotoX\\Desktop\\ProjectTerra\\ProjectTerra.Android\\ProjectTerra.Android.csproj",
+        "packagesPath": "C:\\Users\\tsukimotoX\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\tsukimotoX\\Desktop\\ProjectTerra\\ProjectTerra.Android\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\tsukimotoX\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0-android"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0-android35.0": {
+            "targetAlias": "net9.0-android",
+            "projectReferences": {
+              "C:\\Users\\tsukimotoX\\Desktop\\ProjectTerra\\ProjectTerra\\ProjectTerra.csproj": {
+                "projectPath": "C:\\Users\\tsukimotoX\\Desktop\\ProjectTerra\\ProjectTerra\\ProjectTerra.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "9.0.100"
+      },
+      "frameworks": {
+        "net9.0-android35.0": {
+          "targetAlias": "net9.0-android",
+          "dependencies": {
+            "Microsoft.NET.ILLink.Tasks": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.Android": {
+              "privateAssets": "all"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "android-arm64": {
+          "#import": []
+        },
+        "android-x64": {
+          "#import": []
+        }
+      }
+    },
+    "C:\\Users\\tsukimotoX\\Desktop\\ProjectTerra\\ProjectTerra\\ProjectTerra.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\tsukimotoX\\Desktop\\ProjectTerra\\ProjectTerra\\ProjectTerra.csproj",
+        "projectName": "ProjectTerra",
+        "projectPath": "C:\\Users\\tsukimotoX\\Desktop\\ProjectTerra\\ProjectTerra\\ProjectTerra.csproj",
+        "packagesPath": "C:\\Users\\tsukimotoX\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\tsukimotoX\\Desktop\\ProjectTerra\\ProjectTerra\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\tsukimotoX\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "9.0.100"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "opentk": {
+              "target": "Package",
+              "version": "[4.9.3, )"
+            },
+            "ppy.SDL3-CS": {
+              "target": "Package",
+              "version": "[2024.1128.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
