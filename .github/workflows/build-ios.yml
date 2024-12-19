@@ -1,4 +1,4 @@
-name: Build iOS App with Xamarin
+name: ProjectTerra.IOS build
 
 on:
   push:
@@ -16,27 +16,23 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Setup Mono
+    - name: Update Mono
       run: |
-        brew install mono
-        mono --version
+        brew update
+        brew upgrade mono
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0
 
-    - name: Restore NuGet dependencies
+    - name: Update NuGet
       run: |
-        nuget restore ProjectTerra.iOS/ProjectTerra.iOS.csproj
+        nuget update -self
 
-    - name: Build iOS Project
+    - name: Restore dependencies and build
       run: |
-        msbuild ProjectTerra.iOS/ProjectTerra.iOS.csproj \
-          /t:Build \
-          /p:Configuration=Release \
-          /p:Platform=iPhoneSimulator \
-          /p:OutputPath=./output
+        msbuild /restore ProjectTerra.iOS/ProjectTerra.iOS.csproj /p:Configuration=Release /p:Platform=iPhoneSimulator
 
     - name: Archive and Export IPA
       run: |
