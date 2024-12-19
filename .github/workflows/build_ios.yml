@@ -26,20 +26,20 @@ jobs:
         dotnet workload install ios
         dotnet workload restore ProjectTerra.iOS/ProjectTerra.iOS.csproj
 
-    - name: Create Dummy Signing Profile
+    - name: Build iOS App
       run: |
-        mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-        touch ~/Library/MobileDevice/Provisioning\ Profiles/Fake.mobileprovision
-
-    - name: Publish iOS App
-      run: |
-        dotnet publish ProjectTerra.iOS/ProjectTerra.iOS.csproj \
+        dotnet build ProjectTerra.iOS/ProjectTerra.iOS.csproj \
           -c Release \
           -o ./output \
           /p:RuntimeIdentifier=ios-arm64 \
-          /p:OutputType=Exe \
-          /p:EnableCodeSigning=false \
-          /p:CodesignProvision=~/Library/MobileDevice/Provisioning\ Profiles/Fake.mobileprovision
+          /p:EnableCodeSigning=false
+
+    - name: Archive and Export IPA
+      run: |
+        xcodebuild -exportArchive \
+          -archivePath ./output/ProjectTerra.xcarchive \
+          -exportPath ./output \
+          -exportOptionsPlist ExportOptions.plist
 
     - name: Upload IPA as artifact
       uses: actions/upload-artifact@v3
