@@ -26,24 +26,16 @@ jobs:
         dotnet workload install ios
         dotnet workload restore ProjectTerra.iOS/ProjectTerra.iOS.csproj
 
-    - name: Create Fake Signing Identity
-      run: |
-        mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-        touch ~/Library/MobileDevice/Provisioning\ Profiles/Fake.mobileprovision
-
-    - name: Publish iOS App without Signing
+    - name: Publish iOS App
       run: |
         dotnet publish ProjectTerra.iOS/ProjectTerra.iOS.csproj \
           -c Release \
           -o ./output \
           /p:RuntimeIdentifier=ios-arm64 \
-          /p:OutputType=Exe \
-          /p:EnableCodeSigning=false \
-          /p:CodesignProvision=~/Library/MobileDevice/Provisioning\ Profiles/Fake.mobileprovision
+          /p:SelfContained=false
 
     - name: Upload IPA as artifact
       uses: actions/upload-artifact@v3
       with:
         name: ProjectTerra.ipa
         path: ./output/*.ipa
-
