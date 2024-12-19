@@ -16,9 +16,14 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Restore dependencies
+    - name: Update Mono
       run: |
-        msbuild /restore ProjectTerra.iOS/ProjectTerra.iOS.csproj /p:Configuration=Release /p:Platform=iPhoneSimulator
+        brew update
+        brew upgrade mono
+
+    - name: Restore NuGet dependencies
+      run: |
+        nuget restore ProjectTerra.iOS/ProjectTerra.iOS.csproj
 
     - name: Build iOS Project
       run: |
