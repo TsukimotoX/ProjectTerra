@@ -1,0 +1,52 @@
+name: Build iOS App with Xamarin
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Mono
+      run: |
+        brew install mono
+        mono --version
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0
+
+    - name: Restore NuGet dependencies
+      run: |
+        nuget restore ProjectTerra.sln
+
+    - name: Build iOS Project
+      run: |
+        msbuild ProjectTerra.iOS/ProjectTerra.iOS.csproj \
+          /t:Build \
+          /p:Configuration=Release \
+          /p:Platform=iPhoneSimulator \
+          /p:OutputPath=./output
+
+    - name: Archive and Export IPA
+      run: |
+        xcodebuild -exportArchive \
+          -archivePath ./output/ProjectTerra.xcarchive \
+          -exportPath ./output \
+          -exportOptionsPlist ExportOptions.plist
+
+    - name: Upload IPA as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: ProjectTerra.ipa
+        path: ./output/*.ipa
