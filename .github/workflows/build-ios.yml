@@ -28,7 +28,7 @@ jobs:
 
     - name: Restore NuGet dependencies
       run: |
-        nuget restore ProjectTerra.sln
+        nuget restore ProjectTerra.iOS/ProjectTerra.iOS.csproj
 
     - name: Build iOS Project
       run: |
@@ -50,3 +50,4 @@ jobs:
       with:
         name: ProjectTerra.ipa
         path: ./output/*.ipa
+
