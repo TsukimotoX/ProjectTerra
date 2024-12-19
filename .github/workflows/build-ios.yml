@@ -16,10 +16,19 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Update Mono
+    - name: Install Mono
       run: |
         brew update
-        brew upgrade mono
+        brew install mono
+
+    - name: Install MSBuild
+      run: |
+        brew install --cask visual-studio
+
+    - name: Install NuGet
+      run: |
+        brew install nuget
+        nuget update -self
 
     - name: Restore NuGet dependencies
       run: |
@@ -45,4 +54,3 @@ jobs:
       with:
         name: ProjectTerra.ipa
         path: ./output/*.ipa
-
