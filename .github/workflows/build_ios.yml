@@ -25,6 +25,14 @@ jobs:
       run: |
         dotnet workload install ios
         dotnet workload restore ProjectTerra.iOS/ProjectTerra.iOS.csproj
+      
+    - name: Download Xcode
+      run: |
+        curl -o Xcode_16.2.xip https://developer.apple.com/download/more/
+        sudo xip --expand Xcode_16.2.xip
+        sudo mv Xcode.app /Applications/Xcode_16.2.app
+        sudo xcode-select --switch /Applications/Xcode_16.2.app/Contents/Developer
+
 
     - name: Set Xcode Version
       run: sudo xcode-select --switch /Applications/Xcode_16.2.app/Contents/Developer
