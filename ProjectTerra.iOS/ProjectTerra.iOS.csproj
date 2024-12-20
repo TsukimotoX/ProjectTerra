@@ -3,6 +3,12 @@
     <ProjectReference Include="..\ProjectTerra\ProjectTerra.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <NativeReference Include="NativeLibraries/SDL3.framework">
+        <Kind>Framework</Kind>
+        <ForceLoad>true</ForceLoad>
+    </NativeReference>
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="opentk" Version="4.9.3" />
     <PackageReference Include="ppy.sdl3-cs" Version="2024.1128.0" />
   </ItemGroup>

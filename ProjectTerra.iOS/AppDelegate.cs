@@ -1,5 +1,4 @@
-using System;
-using System.IO;
+using SDL;
 
 namespace ProjectTerra.iOS;
 
@@ -9,8 +8,41 @@ public class AppDelegate : UIApplicationDelegate
     public override bool FinishedLaunching(UIApplication app, NSDictionary options)
     {
         CrashLogger.Initialize();
+
+        if (!SDL3.SDL_Init(SDL_InitFlags.SDL_INIT_VIDEO))
+        {
+            Console.WriteLine($"Failed to initialize SDL: {SDL3.SDL_GetError()}");
+            return false;
+        }
+
         Game.Initialize();
         return true;
+    }
+
+    public override void OnResignActivation(UIApplication application)
+    {
+        Console.WriteLine("Application is going to background.");
+    }
+
+    public override void DidEnterBackground(UIApplication application)
+    {
+        Console.WriteLine("Application entered background.");
+    }
+
+    public override void WillEnterForeground(UIApplication application)
+    {
+        Console.WriteLine("Application will enter foreground.");
+    }
+
+    public override void OnActivated(UIApplication application)
+    {
+        Console.WriteLine("Application is active.");
+    }
+
+    public override void WillTerminate(UIApplication application)
+    {
+        Console.WriteLine("Application is terminating.");
+        SDL3.SDL_Quit(); // Корректное завершение SDL
     }
 }
 
