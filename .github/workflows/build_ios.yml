@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: macos-15  # Используй более новую версию macOS для лучшей совместимости.
+    runs-on: macos-15
 
     steps:
     - name: Checkout code
@@ -25,24 +25,32 @@ jobs:
       run: |
         dotnet workload install ios
         dotnet workload restore ProjectTerra.iOS/ProjectTerra.iOS.csproj
-
+    
     - name: Select Xcode 16.2
       run: sudo xcode-select --switch /Applications/Xcode_16.2.app/Contents/Developer
 
     - name: Build iOS App
       run: |
-        dotnet build ProjectTerra.iOS/ProjectTerra.iOS.csproj \
+        dotnet publish ProjectTerra.iOS/ProjectTerra.iOS.csproj \
           -c Release \
           -o ./output \
           /p:RuntimeIdentifier=ios-arm64 \
           /p:EnableCodeSigning=false
+
+    - name: Create Xcode Archive
+      run: |
+        xcodebuild archive \
+          -project ProjectTerra.iOS/ProjectTerra.iOS.csproj \
+          -scheme ProjectTerra.iOS \
+          -archivePath ./output/ProjectTerra.xcarchive \
+          -sdk iphoneos
 
     - name: Archive and Export IPA
       run: |
         xcodebuild -exportArchive \
           -archivePath ./output/ProjectTerra.xcarchive \
           -exportPath ./output \
-          -exportOptionsPlist ./ProjectTerra.iOS/ExportOptions.plist
+          -exportOptionsPlist ExportOptions.plist
 
     - name: Upload IPA as artifact
       uses: actions/upload-artifact@v3
