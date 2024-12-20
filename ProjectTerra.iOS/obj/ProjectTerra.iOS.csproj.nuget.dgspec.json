@@ -57,6 +57,14 @@
               "target": "Package",
               "version": "[9.0.0, )",
               "autoReferenced": true
+            },
+            "opentk": {
+              "target": "Package",
+              "version": "[4.9.3, )"
+            },
+            "ppy.sdl3-cs": {
+              "target": "Package",
+              "version": "[2024.1128.0, )"
             }
           },
           "imports": [
