@@ -1,4 +1,4 @@
-name: Build iOS App
+name: Project Terra iOS build
 
 on:
   push:
@@ -10,46 +10,42 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: macos-12  # Используй более новую версию macOS для лучшей совместимости.
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Install .NET
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '9.0.x'
+    - name: Install .NET 9 SDK
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 9.0.100
 
-      - name: Restore .NET Workloads
-        run: dotnet workload restore
+    - name: Install iOS Workload
+      run: |
+        dotnet workload install ios
+        dotnet workload restore ProjectTerra.iOS/ProjectTerra.iOS.csproj
 
-      - name: Install Dependencies
-        run: sudo xcode-select --switch /Applications/Xcode_16.2.app/Contents/Developer
+    - name: Select Xcode 16.2
+      run: sudo xcode-select --switch /Applications/Xcode_16.2.app/Contents/Developer
 
-      - name: Build and Publish iOS App
-        run: |
-          dotnet publish ProjectTerra.iOS/ProjectTerra.iOS.csproj \
+    - name: Build iOS App
+      run: |
+        dotnet build ProjectTerra.iOS/ProjectTerra.iOS.csproj \
           -c Release \
-          -f:net9.0-ios \
+          -o ./output \
           /p:RuntimeIdentifier=ios-arm64 \
-          /p:CodesignKey=null \
-          /p:CodesignProvision=null \
-          /p:CodesignEntitlements=null \
           /p:EnableCodeSigning=false
 
-
-
-      - name: Archive App to IPA
-        run: |
-          xcodebuild -exportArchive \
+    - name: Archive and Export IPA
+      run: |
+        xcodebuild -exportArchive \
           -archivePath ./output/ProjectTerra.xcarchive \
-          -exportPath ./output/ProjectTerra.ipa \
-          -exportOptionsPlist ./ExportOptions.plist \
-          CODE_SIGNING_ALLOWED=NO
+          -exportPath ./output \
+          -exportOptionsPlist ./ProjectTerra.iOS/ExportOptions.plist
 
-      - name: Upload IPA
-        uses: actions/upload-artifact@v3
-        with:
-          name: ProjectTerra.ipa
-          path: ./output/ProjectTerra.ipa
+    - name: Upload IPA as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: ProjectTerra.ipa
+        path: ./output/*.ipa
