@@ -9,7 +9,7 @@ public class AppDelegate : UIApplicationDelegate
     public override bool FinishedLaunching(UIApplication app, NSDictionary options)
     {
         CrashLogger.Initialize();
-        //Game.Initialize();
+        Game.Initialize();
         return true;
     }
 }

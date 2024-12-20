@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ProjectTerra.iOS")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4d42ddcc413c1bf42c832543d5a668e767c663fb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+13a10054e5d4addffc67470eb1321a32d74800e4")]
 [assembly: System.Reflection.AssemblyProductAttribute("ProjectTerra.iOS")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ProjectTerra.iOS")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
