@@ -59,6 +59,10 @@ public static unsafe class Game {
     private static void _Run() {
         Start();
 
+        string version = GL.GetString(StringName.Version);
+        string glsrenderer = GL.GetString(StringName.Renderer);
+        
+
         while (_isRunning) {
             var glerror = GL.GetError();
             if (glerror != ErrorCode.NoError) Console.WriteLine($"OpenGL Error: {glerror}");

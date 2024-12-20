@@ -29,6 +29,11 @@ public unsafe class Renderer
             SDL3.SDL_GL_SetAttribute(SDL_GLAttr.SDL_GL_CONTEXT_MINOR_VERSION, 3);
             SDL3.SDL_GL_SetAttribute(SDL_GLAttr.SDL_GL_CONTEXT_PROFILE_MASK, (int)SDL_GLProfile.SDL_GL_CONTEXT_PROFILE_CORE);
         #endif
+        Console.WriteLine($"SDL_GL_CONTEXT_PROFILE_MASK: {SDL3.SDL_GL_GetAttribute(SDL_GLAttr.SDL_GL_CONTEXT_PROFILE_MASK, out int profileMask)}");
+        Console.WriteLine($"SDL_GL_CONTEXT_MAJOR_VERSION: {SDL3.SDL_GL_GetAttribute(SDL_GLAttr.SDL_GL_CONTEXT_MAJOR_VERSION, out int major)}");
+        Console.WriteLine($"SDL_GL_CONTEXT_MINOR_VERSION: {SDL3.SDL_GL_GetAttribute(SDL_GLAttr.SDL_GL_CONTEXT_MINOR_VERSION, out int minor)}");
+
+        Console.WriteLine($"Profile Mask: {profileMask}, Version: {major}.{minor}");
 
         glContext = SDL3.SDL_GL_CreateContext(_window);
         if (glContext == null) throw new Exception("Failed to create OpenGL context");
