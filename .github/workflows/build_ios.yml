@@ -16,16 +16,26 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Install .NET 9 SDK
+    - name: Setup .NET 9 SDK
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 9.0.100
 
-    - name: Install iOS Workload
+    - name: Cache .NET Workload
+      id: cache-workload
+      uses: actions/cache@v3
+      with:
+        path: ~/.dotnet/sdk-manifests ~/.dotnet/workloads ~/.nuget/packages
+        key: dotnet-workloads-${{ runner.os }}-${{ hashFiles('**/ProjectTerra.iOS.csproj') }}
+        restore-keys: |
+          dotnet-workloads-${{ runner.os }}-
+
+    - name: Install iOS Workload if not cached
+      if: steps.cache-workload.outputs.cache-hit != 'true'
       run: |
         dotnet workload install ios
         dotnet workload restore ProjectTerra.iOS/ProjectTerra.iOS.csproj
-    
+
     - name: Select Xcode 16.2
       run: sudo xcode-select --switch /Applications/Xcode_16.2.app/Contents/Developer
 

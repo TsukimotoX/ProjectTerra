@@ -1,5 +1,6 @@
 using SDL;
 using System.Runtime.InteropServices;
+using System.Reflection;
 
 namespace ProjectTerra.iOS;
 
@@ -16,6 +17,17 @@ public class AppDelegate : UIApplicationDelegate
             Console.WriteLine($"Loading SDL3 from: {frameworkPath}");
             return NativeLibrary.Load(frameworkPath, assembly, path);
         });
+
+        try
+        {
+            Console.WriteLine("Loading ProjectTerra core...");
+            var coreAssembly = Assembly.Load("ProjectTerra");
+            Console.WriteLine($"ProjectTerra loaded: {coreAssembly.FullName}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Failed to load ProjectTerra.Core: {ex}");
+        }
 
         if (!SDL3.SDL_Init(SDL_InitFlags.SDL_INIT_VIDEO))
         {
