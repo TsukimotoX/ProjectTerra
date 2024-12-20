@@ -16,7 +16,8 @@ public class AppDelegate : UIApplicationDelegate
 
 public class CrashLogger
 {
-    private static string LogFilePath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), $"log_{DateTime.Now:yyyyMMddHHmm}.txt");
+    private static string documents = Environment.GetFolderPath (Environment.SpecialFolder.MyDocuments);
+    private static string LogFilePath => Path.Combine(documents, "Logs", $"log_{DateTime.Now:yyyyMMddHHmm}.txt");
 
     public static void Initialize()
     {
@@ -40,6 +41,11 @@ public class CrashLogger
     {
         try
         {
+            if (!Directory.Exists("Logs"))
+            {
+                var directoryname = Path.Combine(documents, "Logs");
+                Directory.CreateDirectory(directoryname);
+            }
             File.AppendAllText(LogFilePath, message);
         }
         catch (Exception ex)
