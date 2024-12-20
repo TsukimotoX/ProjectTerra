@@ -31,9 +31,24 @@ public unsafe class Renderer
         #endif
 
         int profileMask = 0, major = 0, minor = 0;
-        Console.WriteLine($"SDL_GL_CONTEXT_PROFILE_MASK: {SDL3.SDL_GL_GetAttribute(SDL_GLAttr.SDL_GL_CONTEXT_PROFILE_MASK, ref profileMask)}");
-        Console.WriteLine($"SDL_GL_CONTEXT_MAJOR_VERSION: {SDL3.SDL_GL_GetAttribute(SDL_GLAttr.SDL_GL_CONTEXT_MAJOR_VERSION, ref major)}");
-        Console.WriteLine($"SDL_GL_CONTEXT_MINOR_VERSION: {SDL3.SDL_GL_GetAttribute(SDL_GLAttr.SDL_GL_CONTEXT_MINOR_VERSION, ref minor)}");
+
+        unsafe
+        {
+            if (!SDL3.SDL_GL_GetAttribute(SDL_GLAttr.SDL_GL_CONTEXT_PROFILE_MASK, &profileMask))
+            {
+                Console.WriteLine($"Failed to get profile mask: {SDL3.SDL_GetError()}");
+            }
+
+            if (!SDL3.SDL_GL_GetAttribute(SDL_GLAttr.SDL_GL_CONTEXT_MAJOR_VERSION, &major))
+            {
+                Console.WriteLine($"Failed to get major version: {SDL3.SDL_GetError()}");
+            }
+
+            if (!SDL3.SDL_GL_GetAttribute(SDL_GLAttr.SDL_GL_CONTEXT_MINOR_VERSION, &minor))
+            {
+                Console.WriteLine($"Failed to get minor version: {SDL3.SDL_GetError()}");
+            }
+        }
 
         Console.WriteLine($"Profile Mask: {profileMask}, Version: {major}.{minor}");
 
