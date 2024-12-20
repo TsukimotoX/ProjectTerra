@@ -16,3 +16,19 @@ This project is currently distributed under a **temporary restrictive license**.
 
 ## How to Run the Game
 Game is currently not available for playtest, being very buggy and in development cycle.
+
+## Contributing
+
+Contributions are not currently accepted as the project is in its early development stages. However, feel free to fork the repository and experiment. Contributions may be welcomed in the future after the game reaches a more stable version.
+
+## Planned Features
+	•	Advanced modding tools and APIs for custom content creation.
+	•	Multiplayer support for shared sandbox experiences.
+	•	Dynamic environments and procedural generation.
+	•	Optimization for various platforms.
+
+##Contact
+
+If you have any questions, feedback, or suggestions, feel free to reach out to me at telegram and discord @tsukimotox, or open an issue in this repository.
+
+Thank you for your interest in ProjectTerra! Stay tuned for updates.
