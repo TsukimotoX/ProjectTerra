@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using Xamarin.Essentials;
 
 namespace ProjectTerra.iOS;
 
@@ -17,7 +16,7 @@ public class AppDelegate : UIApplicationDelegate
 
 public class CrashLogger
 {
-    private static string LogFilePath => Path.Combine(FileSystem.AppDataDirectory, $"log_{DateTime.Now:yyyyMMddHHmm}.txt");
+    private static string LogFilePath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), $"log_{DateTime.Now:yyyyMMddHHmm}.txt");
 
     public static void Initialize()
     {
