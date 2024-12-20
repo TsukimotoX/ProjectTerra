@@ -31,14 +31,11 @@ public unsafe class Renderer
         #endif
 
         glContext = SDL3.SDL_GL_CreateContext(_window);
-        if (glContext == null)
-        {
-            throw new Exception("Failed to create OpenGL context");
-        }
+        if (glContext == null) throw new Exception("Failed to create OpenGL context");
 
         GL.LoadBindings(new OpenGLBindings());
 
-        GL.ClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        GL.ClearColor(1.0f, 0.0f, 0.0f, 1.0f);
         GL.Enable(EnableCap.DepthTest);
 
         shader.Use();

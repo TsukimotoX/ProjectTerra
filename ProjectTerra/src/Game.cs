@@ -15,10 +15,18 @@ public static unsafe class Game {
     public static SDL_Window* window;
     public static Renderer renderer = null;
     private static InputManager _inputManager = new();
-    public static readonly (int w, int h) windowSize = (800, 600);
+    public static (int w, int h) windowSize;
 
     public static void Initialize(){
         if (!SDL3.SDL_Init(SDL_InitFlags.SDL_INIT_VIDEO)) throw new Exception("SDL failed to initialize!");
+        
+        #if ANDROID || IOS
+            var p = SDL3.SDL_GetDisplayBounds(0, out var rect);
+            if (p != 0) throw new Exception("Failed to get display bounds!");
+            windowSize = (rect.w, rect.h);
+        #else
+            windowSize = (800, 600);
+        #endif
 
         window = SDL3.SDL_CreateWindow("Project Terra", windowSize.w, windowSize.h, SDL_WindowFlags.SDL_WINDOW_OPENGL | SDL_WindowFlags.SDL_WINDOW_RESIZABLE);
         if (window == null) throw new Exception("SDL failed to create window!");
@@ -49,6 +57,11 @@ public static unsafe class Game {
         Start();
 
         while (_isRunning) {
+            var glerror = GL.GetError();
+            if (glerror != ErrorCode.NoError) Console.WriteLine($"OpenGL Error: {glerror}");
+            var sdlerror = SDL3.SDL_GetError();
+            if (sdlerror != "" || sdlerror != null) Console.WriteLine($"SDL Error: {sdlerror}");
+
             _inputManager.Loop();
             renderer.Render();
 
