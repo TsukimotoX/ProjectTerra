@@ -1,4 +1,5 @@
 using SDL;
+using System.Runtime.InteropServices;
 
 namespace ProjectTerra.iOS;
 
@@ -8,6 +9,13 @@ public class AppDelegate : UIApplicationDelegate
     public override bool FinishedLaunching(UIApplication app, NSDictionary options)
     {
         CrashLogger.Initialize();
+
+        NativeLibrary.SetDllImportResolver(typeof(SDL3).Assembly, (_, assembly, path) =>
+        {
+            string frameworkPath = "/Frameworks/SDL3.framework/SDL3";
+            Console.WriteLine($"Loading SDL3 from: {frameworkPath}");
+            return NativeLibrary.Load(frameworkPath, assembly, path);
+        });
 
         if (!SDL3.SDL_Init(SDL_InitFlags.SDL_INIT_VIDEO))
         {
