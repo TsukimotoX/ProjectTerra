@@ -32,6 +32,9 @@ public static unsafe class Game {
         if (window == null) throw new Exception("SDL failed to create window!");
 
         renderer = new Renderer(window);
+        if (!SDL3.SDL_GL_MakeCurrent(window, renderer.glContext)) throw new Exception($"Failed to make OpenGL context current: {SDL3.SDL_GetError()}");
+
+        GL.Viewport(0, 0, windowSize.w, windowSize.h);
 
         _Run();
     }

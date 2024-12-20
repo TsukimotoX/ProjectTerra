@@ -12,7 +12,7 @@ namespace ProjectTerra.Core.Render;
 public unsafe class Renderer
 {
     private SDL_Window* _window;
-    private SDL_GLContextState* glContext;
+    public SDL_GLContextState* glContext;
     private Dictionary<string, Action> _renderActions = new Dictionary<string, Action>();
     private static Shader shader = new Shader("ProjectTerra.src.Core.Render.Shader.basic.glsl");
     private static Buffer buffer = new Buffer();
