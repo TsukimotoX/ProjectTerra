@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: macos-12  # Используй более новую версию macOS для лучшей совместимости.
+    runs-on: macos-15  # Используй более новую версию macOS для лучшей совместимости.
 
     steps:
     - name: Checkout code
