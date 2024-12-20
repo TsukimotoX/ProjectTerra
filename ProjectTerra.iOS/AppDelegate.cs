@@ -8,21 +8,32 @@ public class AppDelegate : UIApplicationDelegate
 {
     public override bool FinishedLaunching(UIApplication app, NSDictionary options)
     {
-        Game.Initialize();
         CrashLogger.Initialize();
+        //Game.Initialize();
         return true;
     }
 }
 
 public class CrashLogger
 {
-    private static string documents = Environment.GetFolderPath (Environment.SpecialFolder.MyDocuments);
-    private static string LogFilePath => Path.Combine(documents, "Logs", $"log_{DateTime.Now:yyyyMMddHHmm}.txt");
+    private static readonly string DocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+    private static readonly string LogsDirectory = Path.Combine(DocumentsPath, "Logs");
+    private static string LogFilePath => Path.Combine(LogsDirectory, $"log_{DateTime.Now:yyyyMMddHHmm}.txt");
 
     public static void Initialize()
     {
+        // Создаём папку для логов при инициализации
+        if (!Directory.Exists(LogsDirectory))
+        {
+            Directory.CreateDirectory(LogsDirectory);
+        }
+
+        // Подписываемся на обработчики исключений
         AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
         TaskScheduler.UnobservedTaskException += OnUnobservedTaskException;
+
+        // Для проверки добавляем тестовый лог
+        WriteLog("CrashLogger initialized.\n");
     }
 
     private static void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
@@ -31,7 +42,7 @@ public class CrashLogger
         WriteLog(logMessage);
     }
 
-    private static void OnUnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
+    private static void OnUnobservedTaskException(object? sender, UnobservedTaskExceptionEventArgs e)
     {
         string logMessage = $"[UnobservedTaskException] {DateTime.Now}\n{e.Exception}\n\n";
         WriteLog(logMessage);
@@ -41,11 +52,6 @@ public class CrashLogger
     {
         try
         {
-            if (!Directory.Exists("Logs"))
-            {
-                var directoryname = Path.Combine(documents, "Logs");
-                Directory.CreateDirectory(directoryname);
-            }
             File.AppendAllText(LogFilePath, message);
         }
         catch (Exception ex)
