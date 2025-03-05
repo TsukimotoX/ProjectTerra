@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup Label="Project Settings">
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>ProjectTerra.Game</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup Label="Packages">
+    <ProjectReference Include="..\ProjectTerra.Framework\ProjectTerra.Framework.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectTerra.Framework", "ProjectTerra.Framework\ProjectTerra.Framework.csproj", "{F41E8542-F371-9CDA-990F-3F68A60DF055}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectTerra.Game", "ProjectTerra.Game\ProjectTerra.Game.csproj", "{EB3564AB-A18D-BE3E-D128-C5B42FF303AF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F41E8542-F371-9CDA-990F-3F68A60DF055}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F41E8542-F371-9CDA-990F-3F68A60DF055}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F41E8542-F371-9CDA-990F-3F68A60DF055}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F41E8542-F371-9CDA-990F-3F68A60DF055}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB3564AB-A18D-BE3E-D128-C5B42FF303AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB3564AB-A18D-BE3E-D128-C5B42FF303AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB3564AB-A18D-BE3E-D128-C5B42FF303AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB3564AB-A18D-BE3E-D128-C5B42FF303AF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {81A45970-EAF5-47DA-BCD6-0298C1FEE50B}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,12 @@
+/home/tsukimotox/Desktop/ProjectTerra/ProjectTerra.Framework/bin/Release/net9.0/ProjectTerra.Framework.deps.json
+/home/tsukimotox/Desktop/ProjectTerra/ProjectTerra.Framework/bin/Release/net9.0/ProjectTerra.Framework.dll
+/home/tsukimotox/Desktop/ProjectTerra/ProjectTerra.Framework/bin/Release/net9.0/ProjectTerra.Framework.pdb
+/home/tsukimotox/Desktop/ProjectTerra/ProjectTerra.Framework/obj/Release/net9.0/ProjectTerra.Framework.csproj.AssemblyReference.cache
+/home/tsukimotox/Desktop/ProjectTerra/ProjectTerra.Framework/obj/Release/net9.0/ProjectTerra.Framework.GeneratedMSBuildEditorConfig.editorconfig
+/home/tsukimotox/Desktop/ProjectTerra/ProjectTerra.Framework/obj/Release/net9.0/ProjectTerra.Framework.AssemblyInfoInputs.cache
+/home/tsukimotox/Desktop/ProjectTerra/ProjectTerra.Framework/obj/Release/net9.0/ProjectTerra.Framework.AssemblyInfo.cs
+/home/tsukimotox/Desktop/ProjectTerra/ProjectTerra.Framework/obj/Release/net9.0/ProjectTerra.Framework.csproj.CoreCompileInputs.cache
+/home/tsukimotox/Desktop/ProjectTerra/ProjectTerra.Framework/obj/Release/net9.0/ProjectTerra.Framework.dll
+/home/tsukimotox/Desktop/ProjectTerra/ProjectTerra.Framework/obj/Release/net9.0/refint/ProjectTerra.Framework.dll
+/home/tsukimotox/Desktop/ProjectTerra/ProjectTerra.Framework/obj/Release/net9.0/ProjectTerra.Framework.pdb
+/home/tsukimotox/Desktop/ProjectTerra/ProjectTerra.Framework/obj/Release/net9.0/ref/ProjectTerra.Framework.dll

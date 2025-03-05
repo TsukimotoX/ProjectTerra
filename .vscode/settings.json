@@ -1,0 +1,18 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "ProjectTerra.Framework/bin": true,
+        "ProjectTerra.Framework/obj": true,
+        "ProjectTerra.Game/obj": true
+    },
+    "hide-files.files": [
+        "ProjectTerra.Framework/bin",
+        "ProjectTerra.Framework/obj",
+        "ProjectTerra.Game/obj"
+    ]
+}
